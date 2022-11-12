@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container mt-5 d-flex flex-column justify-content-evenly align-items-center">
+                    <h1 class="text-center display-1">New Brand Form</h1>
+                    <form class="w-50 mt-5" method="post" action="">
+                         <div class="input-group mb-5">
+                              <span class="input-group-text" id="name"> Name: </span>
+                              <input type="text" class="form-control" aria-label="company name"
+                              name="company_name" aria-describedby="company name"
+                                   value=<%=(locals.brand?brand.company_name:'') %>>
+                         </div>
+                         <div class="input-group mb-5">
+                              <label class="input-group-text" for="select"> Country: </label>
+                              <select class="form-select" name="region" id="select" aria-label="country select">
+                                        <% for(let [code,country] of [["us","United States"],["eu","European Union"],["jp","Japan"],["uk","United Kingdom"],["cn","Republic of China"],["in","India"],["ru","Russia"],["au","Australia"],["za","South Africa"]]) { %>
+                                             <% if((locals.brand)&&(brand.region == code)) { %>
+                                                  <option value="<%=code%>" selected><%=country%></option>
+                                             <% } else { %>
+                                                  <option value="<%=code%>"><%=country%></option>
+                                             <% } %>
+                                        <% } %>
+                              </select>
+                         </div>
+                         <div class="input-group mb-5">
+                              <span class="input-group-text" id="logo"> Logo URL: </span>
+                              <input type="text" class="form-control" placeholder="https://logo.jpg"
+                                   aria-label="company logo" name="logo" aria-describedby="company logo"
+                                   value=<%=(locals.brand)?(brand.logo):''%>>
+                         </div>
+                         <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <% if(locals.errors){ %>
+                         <div class="alert alert-danger" role="alert">
+                              <% for (let error in errors) {%>
+                                   <p>
+                                        <%= error.msg %>
+                                   </p>
+                                   <% } %>
+                         </div>
+                         <% } %>
+               </div>
+     </body>
+
+</html>

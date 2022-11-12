@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="d-flex flex-row align-items-stretchr justify-content-evenly flex-wrap p-5">
+                    <% for (let item of items){ %>
+                         <div class="mb-5 me-5 mh-50 w-25 card border-dark p-3 text-center">
+                              <div class="card-header">
+                                   <h3 class="display-5">
+                                        <%= item.product.name %>
+                                   </h3>
+                              </div>
+                              <div class="card-body">
+                                   <h5 class="card-title">
+                                        <%= item.id %>
+                                   </h5>
+                                   <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                             <%= item.product.price %>$
+                                        </li>
+                                        <li class="list-group-item">
+                                             Availability: <%= item.status %>
+                                        </li>
+                                        <li class="list-group-item">
+                                             Manufactring Date: <%= String(item.manufactringDate).slice(4,16) %>
+                                        </li>
+                                   </ul>
+                              </div>
+                              <div class="card-footer bg-transparent border-primary">
+                                   <a href="/item/<%= item.id %>" class="btn btn-outline-primary">Visit
+                                        item</a>
+                              </div>
+                         </div>
+                         <% } %>
+               </div>
+     </body>
+
+</html>

@@ -4,6 +4,8 @@ var router = express.Router();
 const Product = require('../models/product');
 const Brand = require('../models/brand');
 const Category = require('../models/category');
+const Item = require('../models/item');
+
 
 const { brandController } = require('../controllers/brandController');
 const { categoryController } = require('../controllers/categoryController');
@@ -12,8 +14,17 @@ const { productController } = require('../controllers/productController');
 
 
 const index = (req, res) => {
-  res.render('index', { title: 'Tunguska' });
-}
+  Promise.all([
+    Product.find({}).exec(),
+    Brand.find({}).exec(),
+    Category.find({}).exec(),
+    Item.find({}).populate("product").exec(),
+  ]).then(([products, brands, categories, items]) => {
+    res.render('index', { title: 'Home', products, brands, categories, items });
+  }).catch((err) => {
+    res.render('error', { error: err });
+  });
+};
 
 router.get('/', index);
 

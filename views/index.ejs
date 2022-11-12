@@ -1,8 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./head',{ title: locals.title }) -%>
-<body>
-  
-</body>
+
+     <body>
+          <%- include('./header') -%>
+               <div class="p-5 d-flex flex-column justify-content-evenly align-items-center text-center">
+                    <div class="w-50">
+                         <h3 class="display-5"> : <%= brands.length %> Brands : 
+                         </h3>
+                         <ul class="list-group">
+                              <% for(const brand of brands){ %>
+                                   <li class="list-group-item display-6"> <%= brand.company_name%></li>
+                                   <% } %>
+                         </ul>
+                         <hr>
+                    </div>
+                    <div class="w-50">
+                         <h3 class="display-5">: <%= products.length %> Products :
+                         </h3>
+                         <ul class="list-group">
+                              <% for(const product of products){ %>
+                                   <li class="list-group-item display-6"> <%= product.name%></li>
+                                   <% } %>
+                         </ul>
+                         <hr>
+                    </div>
+                    <div class="w-50">
+                         <h3 class="display-5"> : <%= categories.length %> Categories :
+                         </h3>
+                         <ul class="list-group">
+                              <% for(const category of categories){ %>
+                                   <li class="list-group-item display-6"> <%= category.name%></li>
+                                   <% } %>
+                         </ul>
+                         <hr>
+                    </div>
+                    <div class="w-50">
+                    <h3 class="display-5">: <%= items.length %> Items :</h3>
+                    <ul class="list-group">
+                         <% for(const item of items){ %>
+                              <li class="list-group-item display-6"> <%= item.product.name%> | <%= item.status %> </li>
+                              <% } %>
+                    </ul>
+                         </div>
+               </div>
+     </body>
 
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container d-flex flex-column justify-content-evenly text-center">
+                    <h1 class="display-1 p-5">
+                         <%= item.id %>
+                    </h1>
+                    <h2 class="display-4 p-3">
+                         <%= item.product.name %>
+                    </h2>
+                    <h3 class="display-5 p-2">
+                         Availability: <%= item.status %>
+                    </h3>
+                    <h3 class="display-5 p-2">
+                         Manufactring Date: <%= String(item.manufactringDate).slice(4,16) %>
+                    </h3>
+               </div>
+     </body>
+
+</html>

@@ -5,10 +5,16 @@ exports.itemController = {
      list: (req, res) => {
           Item.find().populate("product").exec().then((items) => {
                res.render("item/list", { items, title: "Items" });
-          });
+          }).catch((err) => {
+               res.render("error", { error: err });
+          });;
      },
      detail: (req, res) => {
-          res.send("Item Details Not Yet Implemented");
+          Item.findById(req.params.id).populate("product").exec().then((item) => {
+               res.render("item/detail", { item: item, title: item.product.name });
+          }).catch((err) => {
+               res.render("error", { error: err });
+          });
      },
      create: {
           get: (req, res) => {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container text-center">
+                    <h1 class="display-1 p-5">
+                         <%= brand.company_name %>
+                    </h1>
+                    <h2 class="display-4 p-3">
+                         <%= brand.country %>
+                    </h2>
+                    <a href="https://<%=brand.website %>" class="h6 mb-3"> Visit Website </a>
+                    <p class="h5 mb-3"> Customer Support: <%= brand.customer_support %>
+                    </p>
+                    <h2 class="display-4"> Products </h2>
+               </div>
+               
+               <div class="d-flex flex-row align-items-stretchr justify-content-evenly flex-wrap p-5">
+                    <% for (let product of products){ %>
+                         <div class="mb-5 me-5 mh-50 w-25 card border-dark p-3 text-center">
+                              <div class="card-header">
+                                   <h3 class="display-5">
+                                        <%= product.name %>
+                                   </h3>
+                              </div>
+                              <img src=<%=product.image%> class="card-img-top image me-3 mb-3" alt="...">
+                              <div class="card-body">
+                                   <h4 class="card-title display-6">
+                                        <%= product.price %>$
+                                   </h4>
+
+                                   <h3 class="display-6">
+                                        <%= product.brand.company_name %>
+                                   </h3>
+                              </div>
+                              <div class="card-footer bg-transparent border-success">
+                                   <a href="/product/<%= product.id %>" class="btn btn-outline-success">View
+                                        Product</a>
+                              </div>
+                         </div>
+                         <% } %>
+               </div>
+     </body>
+
+</html>

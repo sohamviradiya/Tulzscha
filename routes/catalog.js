@@ -12,7 +12,6 @@ const { categoryController } = require('../controllers/categoryController');
 const { itemController } = require('../controllers/itemController');
 const { productController } = require('../controllers/productController');
 
-
 const index = (req, res) => {
   Promise.all([
     Product.find({}).exec(),
@@ -45,12 +44,6 @@ router.post('/product/new', productController.create.post);
 router.get('/item/new', itemController.create.get);
 router.post('/item/new', itemController.create.post);
 
-
-router.get('/brand/:id', brandController.detail);
-router.get('/categorie/:id', categoryController.detail);
-router.get('/product/:id', productController.detail);
-router.get('/item/:id', itemController.detail);
-
 router.get('/brand/new', brandController.create.get);
 router.post('/brand/new', brandController.create.post);
 
@@ -63,11 +56,16 @@ router.post('/product/new', productController.create.post);
 router.get('/item/new', itemController.create.get);
 router.post('/item/new', itemController.create.post);
 
+router.get('/brand/:id', brandController.detail);
+router.get('/category/:id', categoryController.detail);
+router.get('/product/:id', productController.detail);
+router.get('/item/:id', itemController.detail);
+
 router.get('/brand/:id/delete', brandController.delete.get);
 router.post('/brand/:id/delete', brandController.delete.post);
 
-router.get('/categorie/:id/delete', categoryController.delete.get);
-router.post('/categorie/:id/delete', categoryController.delete.post);
+router.get('/category/:id/delete', categoryController.delete.get);
+router.post('/category/:id/delete', categoryController.delete.post);
 
 router.get('/product/:id/delete', productController.delete.get);
 router.post('/product/:id/delete', productController.delete.post);
@@ -78,8 +76,8 @@ router.post('/item/:id/delete', itemController.delete.post);
 router.get('/brand/:id/update', brandController.update.get);
 router.post('/brand/:id/update', brandController.update.post);
 
-router.get('/categorie/:id/update', categoryController.update.get);
-router.post('/categorie/:id/update', categoryController.update.post);
+router.get('/category/:id/update', categoryController.update.get);
+router.post('/category/:id/update', categoryController.update.post);
 
 router.get('/product/:id/update', productController.update.get);
 router.post('/product/:id/update', productController.update.post);

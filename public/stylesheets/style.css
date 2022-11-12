@@ -5,3 +5,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+.image{
+  max-height: 300px;
+  padding: 2vh;
+  width: auto;
+}

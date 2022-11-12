@@ -14,12 +14,16 @@
                               </div>
                               <img src=<%=product.image%> class="card-img-top image me-3 mb-3" alt="...">
                               <div class="card-body">
-                                   <h4 class="card-title display-6"> <%= product.price %>$ </h4>
-                                   
-                                   <h3 class="display-6"><%= product.brand.company_name %></h3>
+                                   <h4 class="card-title display-6">
+                                        <%= product.price %>$
+                                   </h4>
+
+                                   <h3 class="display-6">
+                                        <%= product.brand.company_name %>
+                                   </h3>
                               </div>
                               <div class="card-footer bg-transparent border-success">
-                                   <a href="/product/<%= product.id %>" class="btn btn-outline-success">View
+                                   <a href="/catalog/product/<%= product.id %>" class="btn btn-outline-success">View
                                         Product</a>
                               </div>
                          </div>

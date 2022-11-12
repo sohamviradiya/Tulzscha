@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container text-center d-flex flex-row">
+                    <img src=<%=product.image%> class="image w-50 me-3 mb-3" alt="...">
+                    <div class="d-flex flex-column align-items-center">
+                         <h1 class="display-1 p-5">
+                              <%= product.name %>
+                         </h1>
+                         <h2 class="display-3 mb-2">
+                              <a class="text-decoration-none" href="/catalog/brand/<%= product.brand.id %>">
+                                   <%= product.brand.company_name %>
+                              </a>
+                         </h2>
+                         <h3 class="display-4 mb-2">
+                              Category: <a class="text-decoration-none" href="/catalog/category/<%= product.category.id %>">
+                                   <%= product.category.name %>
+                              </a>
+                         </h3>
+                         <h4 class="display-5 mb-2">
+                                   Price: <%= product.price %>$
+                         </h4>
+                         <h5 class="display-5 mb-2">
+                              Warrenty: <%= product.warrenty %> years
+                         </h5>
+                         <p class="h4 mb-2 text-start p-3">
+                              <%= product.description %>
+                         </p>
+                    </div>
+               </div>
+               <table class="text-center table table-dark table-striped h5">
+                    <tr>
+                         <th class="p-3"> Id </th>
+                         <th class="p-3"> Status </th>
+                         <th class="p-3"> Manufacturing Date</th>
+                    </tr>
+                    <% for(let item of items) { %>
+                         <tr>
+                              <td class="p-3">
+                                   <%= item.id %>
+                              </td>
+                              <td class="p-3">
+                                   <%= item.status %>
+                              </td>
+                              <td class="p-3">
+                                   <%= item.manufactringDate %>
+                              </td>
+                         </tr>
+                         <% } %>
+               </table>
+     </body>
+
+</html>

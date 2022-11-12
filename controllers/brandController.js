@@ -22,7 +22,6 @@ exports.brandController = {
                          else
                               res.render("brand/detail", { brand, products, title: brand.name });
                     }).catch((err) => {
-                    console.log('err', err);
                     res.render("error", { error: err });
                });
      },

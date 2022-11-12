@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container text-center">
+                    <h1 class="display-1 p-5">
+                         <%= category.name %>s
+                    </h1>
+               </div>
+               <table class="text-center table table-dark table-striped h5">
+                    <th class="p-3"> Name </th>
+                    <th class="p-3"> Price </th>
+                    <th class="p-3"> Producer </th>
+                    <% for(let field of category.statfields){ %>
+                         <th class="p-3">
+                              <%= field %>
+                         </th>
+                         <% } %>
+                              <% for(let product of products) { %>
+                                   <tr>
+                                        <td class="p-3">
+                                             <%= product.name %>
+                                        </td>
+                                        <td class="p-3">
+                                             <%= product.price %>$
+                                        </td>
+                                        <td class="p-3">
+                                             <%= product.brand.company_name %>
+                                        </td>
+                                        <% for(let field of category.statfields){ %>
+                                             <td class="p-3">
+                                                  <%= product.stats.get(field) %>
+                                             </td>
+                                             <% } %>
+                                   </tr>
+                                   <% } %>
+               </table>
+     </body>
+
+</html>

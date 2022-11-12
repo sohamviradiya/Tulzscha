@@ -25,7 +25,6 @@ exports.brandController = {
                     console.log('err', err);
                     res.render("error", { error: err });
                });
-
      },
      create: {
           get: (req, res) => {

@@ -11,7 +11,21 @@ exports.categoryController = {
           });
      },
      detail: (req, res) => {
-          res.send("Category Details Not Yet Implemented");
+          console.log('req.params.id', req.params.id);
+          const id = req.params.id;
+          Promise.all(
+               [Category.findById(id).exec(),
+               Product.find({ category: id }).populate("brand").exec()]).then(([category, products]) => {
+                    if (!category)
+                         res.render("error", { error: "Category not found" });
+                    else if (!products)
+                         res.render("error", { error: "Products not found" });
+                    else
+                         res.render("category/detail", { category: category, products, title: category.name });
+               }).catch((err) => {
+                    console.log('err', err);
+                    res.render("error", { error: err });
+               });
      },
      create: {
           get: (req, res) => {

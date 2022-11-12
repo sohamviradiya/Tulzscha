@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="d-flex flex-row align-items-stretchr justify-content-evenly flex-wrap p-5">
+                    <% for (let brand of brands){ %>
+                         <div class="mb-5 me-5 mh-50 w-25 card border-dark p-3 text-center">
+                              <div class="card-header">
+                                   <h3 class="display-5">
+                                        <%= brand.company_name %>
+                                   </h3>
+                              </div>
+                              <img src=<%=brand.logo%> class="card-img-top image me-3 mb-3" alt="...">
+                              <div class="card-body">
+                                   <h4 class="card-title display-6">
+                                        Based in <%= brand.country %>
+                                   </h4>
+                              </div>
+                              <div class="card-footer bg-transparent border-primary">
+                                   <a href="/brand/<%= brand.id %>" class="btn btn-outline-primary">Visit
+                                        Brand</a>
+                              </div>
+                         </div>
+                         <% } %>
+               </div>
+     </body>
+
+</html>

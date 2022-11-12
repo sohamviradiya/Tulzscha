@@ -6,9 +6,9 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
-
-const mongoUserName = (process.env.MONGO_USERNAME)||'';
-const mongoPassKey = (process.env.MONGO_PASSWORD)||'';
+require('dotenv').config();
+const mongoUserName = (process.env.MONGO_USERNAME) || '';
+const mongoPassKey = (process.env.MONGO_PASSWORD) || '';
 
 mongoose.connect(`mongodb+srv://${mongoUserName}:${mongoPassKey}@azathoth.aaxtr1t.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;

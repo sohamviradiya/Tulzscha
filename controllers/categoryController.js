@@ -23,7 +23,6 @@ exports.categoryController = {
                     else
                          res.render("category/detail", { category: category, products, title: category.name });
                }).catch((err) => {
-                    console.log('err', err);
                     res.render("error", { error: err });
                });
      },

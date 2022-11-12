@@ -3,14 +3,14 @@
 
 <%- include('./head',{title: locals.error.status}) %>
 
-<body>
-  <%- include('./header') %>
-  <h1>
-    <%= error.message %>
-  </h1>
-  <h3>
-    <%= error.stack %>
-  </h3>
-</body>
+  <body>
+    <%- include('./header') %>
+      <h1>
+        <%= error.message %>
+      </h1>
+      <h3>
+        <%= error.stack %>
+      </h3>
+  </body>
 
 </html>

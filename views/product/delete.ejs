@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container d-flex flex-column justify-content-evenly text-center">
+                    <% if(locals.items.length> 0) { %>
+                         <h1 class="mb-3"> Unable to Delete</h1>
+                         <h2 class="mb-3">There are items in this category</h2>
+                         <div class="container mb-3 d-flex flex-column justify-content-evenly text-center">
+                              <% for(let item of items) { %>
+                                   <a class="text-decoration-none mb-2" href="/catalog/item/<%=item.id%>">
+                                        <%= item.id %>
+                                   </a>
+                                   <% } %>
+                         </div>
+                         <a class="btn btn-primary mb-3" href="/catalog/product/<%=product.id%>">Back</a>
+                         <% } else { %>
+
+                              <h1>Are you sure you want to delete this product?</h1>
+                              <h2>
+                                   <%= product.name %>
+                              </h2>
+                              <form action="" method="POST">
+                                   <button type="submit" class="btn btn-danger">Delete</button>
+                                   <a class="btn btn-primary" href="/catalog/product/<%=product.id%>">Cancel</a>
+                              </form>
+
+                              <% } %>
+               </div>
+     </body>
+
+</html>

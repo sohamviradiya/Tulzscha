@@ -79,7 +79,6 @@ exports.productController = {
                const id = req.params.id;
                Product.findById(id).populate("brand").populate("category").exec().then(
                     (product) => {
-                         console.log(product.stats);
                          if (!product)
                               res.render("error", { error: "Product not found" });
                          else
@@ -94,7 +93,6 @@ exports.productController = {
                     category.statfields.forEach((field) => {
                          stats.set(field, req.body[field]);
                     });
-                    console.log(stats);
                     const product = new Product({
                          name: req.body.name,
                          description: req.body.description,
@@ -116,10 +114,26 @@ exports.productController = {
      },
      delete: {
           get: (req, res) => {
-               res.send("Product Deletion Get Not Yet Implemented");
+               Promise.all([
+                    Product.findById(req.params.id).populate("brand").populate("category").exec(),
+                    Item.find({ product: req.params.id }).exec()
+               ]).then(([product, items]) => {
+                    if (!product)
+                         res.render("error", { error: "Product not found" });
+                    else if (!items)
+                         res.render("error", { error: "Items not found" });
+                    else
+                         res.render("product/delete", { product: product, items: items, title: product.name });
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
           post: (req, res) => {
-               res.send("Product Deletion Post Not Yet Implemented");
+               Product.findByIdAndRemove(req.params.id).then(() => {
+                    res.redirect("/catalog/product/list");
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           }
      }
 };

@@ -6,11 +6,15 @@
           <%- include('./header') -%>
                <div class="p-5 d-flex flex-column justify-content-evenly align-items-center text-center">
                     <div class="w-50">
-                         <h3 class="display-5"> : <%= brands.length %> Brands : 
+                         <h3 class="display-5"> : <%= brands.length %> Brands :
                          </h3>
                          <ul class="list-group">
                               <% for(const brand of brands){ %>
-                                   <li class="list-group-item display-6"> <%= brand.company_name%></li>
+                                   <li class="list-group-item display-6">
+                                        <a class="text-decoration-none" href="/catalog/brand/<%= brand.id %>">
+                                             <%= brand.company_name%>
+                                        </a>
+                                   </li>
                                    <% } %>
                          </ul>
                          <hr>
@@ -20,7 +24,11 @@
                          </h3>
                          <ul class="list-group">
                               <% for(const product of products){ %>
-                                   <li class="list-group-item display-6"> <%= product.name%></li>
+                                   <li class="list-group-item display-6">
+                                        <a class="text-decoration-none" href="/catalog/product/<%= product.id %>">
+                                             <%= product.name%>
+                                        </a>
+                                   </li>
                                    <% } %>
                          </ul>
                          <hr>
@@ -30,19 +38,27 @@
                          </h3>
                          <ul class="list-group">
                               <% for(const category of categories){ %>
-                                   <li class="list-group-item display-6"> <%= category.name%></li>
+                                   <li class="list-group-item display-6">
+                                        <a class="text-decoration-none" href="/catalog/category/<%= category.id %>">
+                                             <%= category.name%>
+                                        </a>
+                                   </li>
                                    <% } %>
                          </ul>
                          <hr>
                     </div>
                     <div class="w-50">
-                    <h3 class="display-5">: <%= items.length %> Items :</h3>
-                    <ul class="list-group">
-                         <% for(const item of items){ %>
-                              <li class="list-group-item display-6"> <%= item.product.name%> | <%= item.status %> </li>
-                              <% } %>
-                    </ul>
-                         </div>
+                         <h3 class="display-5">: <%= items.length %> Items :</h3>
+                         <ul class="list-group">
+                              <% for(const item of items){ %>
+                                   <li class="list-group-item display-6">
+                                        <a class="text-decoration-none" href="/catalog/item/<%= item.id %>">
+                                             <%= item.product.name%> | <%= item.status %>
+                                        </a>
+                                   </li>
+                                   <% } %>
+                         </ul>
+                    </div>
                </div>
      </body>
 

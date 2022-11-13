@@ -24,7 +24,7 @@
                               <% for(let product of products) { %>
                                    <tr>
                                         <td class="p-3">
-                                             <%= product.name %>
+                                             <a class="text-decoration-none link-light" href="/catalog/product/<%= product.id %>"> <%= product.name %> </a>
                                         </td>
                                         <td class="p-3">
                                              <%= product.price %>$

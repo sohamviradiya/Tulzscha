@@ -112,10 +112,26 @@ exports.brandController = {
      },
      delete: {
           get: (req, res) => {
-               res.send("Brand Deletion Get Not Yet Implemented");
+               Promise.all([
+                    Brand.findById(req.params.id).exec(),
+                    Product.find({ brand: req.params.id }).exec()]).then(([brand, products]) => {
+                         if (!brand)
+                              res.render("error", { error: "Brand not found" });
+                         else if (!products)
+                              res.render("error", { error: "Products not found" });
+                         else
+                              res.render("brand/delete", { brand, products, title: brand.name });
+                    }).catch((err) => {
+                         res.render("error", { error: err });
+                    });
           },
           post: (req, res) => {
-               res.send("Brand Deletion Post Not Yet Implemented");
+               Brand.findByIdAndRemove(req.params.id, (err) => {
+                    if (err) {
+                         return next(err);
+                    }
+                    res.redirect("/catalog/brand/list");
+               });
           }
      }
 };

@@ -48,7 +48,7 @@ exports.itemController = {
                     console.log(manufactringDate);
                     Product.find().exec().then((products) => {
                          console.log(item);
-                              res.render("item/create", { item,manufactringDate, products, title: "Update Item" });
+                         res.render("item/create", { item, manufactringDate, products, title: "Update Item" });
                     }).catch((err) => {
                          res.render("error", { error: err });
                     });
@@ -56,7 +56,7 @@ exports.itemController = {
                     res.render("error", { error: err });
                });
           },
-          post: (req, res,next) => {
+          post: (req, res, next) => {
                const item = {
                     product: req.body.product,
                     status: req.body.status,
@@ -73,10 +73,23 @@ exports.itemController = {
      },
      delete: {
           get: (req, res) => {
-               res.send("Item Deletion Get Not Yet Implemented");
+               Item.findById(req.params.id).populate("product").exec().then((item) => {
+                    if (item == null) {
+                         res.render("error", { error: new Error("Item not found") });
+                         return;
+                    }
+                    res.render("item/delete", { item, title: "Delete Item" });
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
           post: (req, res) => {
-               res.send("Item Deletion Post Not Yet Implemented");
+               Item.findByIdAndRemove(req.params.id, (err) => {
+                    if (err) {
+                         return next(err);
+                    }
+                    res.redirect("/catalog/item/list");
+               });
           }
      }
 };

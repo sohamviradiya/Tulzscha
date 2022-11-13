@@ -1,5 +1,6 @@
 const Category = require("../models/category");
 const Product = require("../models/product");
+const { body, validationResult } = require("express-validator");
 
 exports.categoryController = {
      list: (req, res) => {
@@ -28,19 +29,82 @@ exports.categoryController = {
      },
      create: {
           get: (req, res) => {
-               res.send("Category Creation Get Not Yet Implemented");
+               res.render("category/create", { title: "Create Category" });
           },
-          post: (req, res) => {
-               res.send("Category Creation Post Not Yet Implemented");
-          }
+          post: [body("name")
+               .trim()
+               .isLength({ min: 1 })
+               .escape()
+               .withMessage("category name must be specified.")
+               .isAlphanumeric()
+               .withMessage("category name has non-alphanumeric characters."),
+          body("statfields").trim().escape().replace(" ", "_"),
+          (req, res, next) => {
+               req.body.statfields = req.body.statfields.split(",");
+               const errors = validationResult(req);
+               if (!errors.isEmpty()) {
+                    res.render("category/create", {
+                         title: "Create Category",
+                         category: req.body,
+                         errors: errors.array(),
+                    });
+                    return;
+               }
+               const category = new Category({
+                    name: req.body.name,
+                    statfields: req.body.statfields
+               });
+               category.save((err) => {
+                    if (err) {
+                         return next(err);
+                    }
+                    res.redirect(`/catalog/category/${category.id}`);
+               });
+          }]
      },
      update: {
           get: (req, res) => {
-               res.send("Category Updation Get Not Yet Implemented");
+               Category.findById(req.params.id).exec().then((category) => {
+                    if (!category)
+                         res.render("error", { error: "Category not found" });
+                    else
+                         res.render("category/create", { category, title: "Update Category" });
+               }
+               ).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
-          post: (req, res) => {
-               res.send("Category Updation Post Not Yet Implemented");
-          }
+          post: [body("name")
+               .trim()
+               .isLength({ min: 1 })
+               .escape()
+               .withMessage("category name must be specified.")
+               .isAlphanumeric()
+               .withMessage("category name has non-alphanumeric characters."),
+          body("statfields").trim().escape().replace(" ", "_"),
+          (req, res, next) => {
+               req.body.statfields = req.body.statfields.split(",");
+               const errors = validationResult(req);
+               if (!errors.isEmpty()) {
+                    res.render("category/create", {
+                         title: "Create Category",
+                         category: req.body,
+                         errors: errors.array(),
+                    });
+                    return;
+               }
+               const category = new Category({
+                    name: req.body.name,
+                    statfields: req.body.statfields,
+                    _id: req.params.id
+               });
+               Category.findByIdAndUpdate(req.params.id, category, {}, (err, updated_category) => {
+                    if (err) {
+                         return next(err);
+                    }
+                    res.redirect(`/catalog/category/${updated_category.id}`);
+               });
+          }]
      },
      delete: {
           get: (req, res) => {

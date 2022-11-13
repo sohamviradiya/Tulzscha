@@ -60,8 +60,7 @@ exports.brandController = {
                     }
                     res.redirect(`/catalog/brand/${brand.id}`);
                });
-          }
-          ]
+          }]
      },
      update: {
           get: (req, res) => {
@@ -85,7 +84,7 @@ exports.brandController = {
                .isAlphanumeric()
                .withMessage("company name has non-alphanumeric characters."),
           body("url").trim(),
-               (req, res, next) => {
+          (req, res, next) => {
                console.log('req.body', req.body);
                const errors = validationResult(req);
                if (!errors.isEmpty()) {
@@ -102,11 +101,11 @@ exports.brandController = {
                     logo: req.body.logo,
                     _id: req.params.id
                });
-               Brand.findByIdAndUpdate(req.params.id, brand, {}, (err, updatedbrand) => {
+               Brand.findByIdAndUpdate(req.params.id, brand, {}, (err, updated_brand) => {
                     if (err) {
                          return next(err);
                     }
-                    res.redirect(`/catalog/brand/${updatedbrand.id}`);
+                    res.redirect(`/catalog/brand/${updated_brand.id}`);
                });
           }
           ]

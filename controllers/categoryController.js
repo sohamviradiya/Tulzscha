@@ -7,12 +7,10 @@ exports.categoryController = {
           Category.find().exec().then((categories) => {
                res.render("category/list", { categories, title: "Categories" });
           }).catch((err) => {
-               console.log(err);
                res.render("error", { error: err });
           });
      },
      detail: (req, res) => {
-          console.log('req.params.id', req.params.id);
           const id = req.params.id;
           Promise.all(
                [Category.findById(id).exec(),

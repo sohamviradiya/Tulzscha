@@ -11,7 +11,6 @@ exports.brandController = {
           });
      },
      detail: (req, res) => {
-          console.log('req.params.id', req.params.id);
           const id = req.params.id;
           Promise.all(
                [Brand.findById(id).exec(),
@@ -85,7 +84,6 @@ exports.brandController = {
                .withMessage("company name has non-alphanumeric characters."),
           body("url").trim(),
           (req, res, next) => {
-               console.log('req.body', req.body);
                const errors = validationResult(req);
                if (!errors.isEmpty()) {
                     res.render("brand/create", {

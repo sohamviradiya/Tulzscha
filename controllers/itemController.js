@@ -45,9 +45,7 @@ exports.itemController = {
                          return;
                     }
                     const manufactringDate = item.manufactringDate.toISOString().split("T")[0];
-                    console.log(manufactringDate);
                     Product.find().exec().then((products) => {
-                         console.log(item);
                          res.render("item/create", { item, manufactringDate, products, title: "Update Item" });
                     }).catch((err) => {
                          res.render("error", { error: err });

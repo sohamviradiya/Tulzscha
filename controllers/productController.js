@@ -52,7 +52,6 @@ exports.productController = {
                          category.statfields.forEach((field) => {
                               stats.set(field, req.body[field]);
                          });
-                         console.log(stats);
                          const product = new Product({
                               name: req.body.name,
                               description: req.body.description,

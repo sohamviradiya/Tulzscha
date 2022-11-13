@@ -108,10 +108,22 @@ exports.categoryController = {
      },
      delete: {
           get: (req, res) => {
-               res.send("Category Deletion Get Not Yet Implemented");
+               Promise.all([
+                    Category.findById(req.params.id).exec(),
+                    Product.find({ category: req.params.id }).exec()
+               ]).then(([category, products]) => {
+                    res.render("category/delete", { category, products, title: "Delete Category" });
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
           post: (req, res) => {
-               res.send("Category Deletion Post Not Yet Implemented");
+               Category.findByIdAndDelete(req.params.id, {}, (err) => {
+                    if (err)
+                         res.render("error", { error: err });
+                    else
+                         res.redirect("/catalog/category/list");
+               });
           }
      }
 };

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container mt-5 d-flex flex-column justify-content-evenly align-items-center">
+                    <h1 class="text-center display-1">
+                         <%= locals.title %>
+                    </h1>
+
+                    <% if(locals.categories) {%>
+                         <form class="w-50 mt-5 mb-5" method="post" action="">
+                              <input hidden="true" name="category_selection" value=<%=true%>>
+                              <div class="input-group mb-5">
+                                   <label class="input-group-text" for="select"> Brand </label>
+                                   <select class="form-select" name="brand" id="select" aria-label="category select">
+                                        <% for(let brand of locals.brands) { %>
+                                             <option value="<%= brand.id %>">
+                                                  <%= brand.company_name %>
+                                             </option>
+                                             <% } %>
+                                   </select>
+                              </div>
+                              <div class="input-group mb-5">
+                                   <label class="input-group-text" for="select"> Category </label>
+                                   <select class="form-select" name="category" id="select" aria-label="category select">
+                                        <% for(let category of locals.categories) { %>
+                                             <option value="<%= category.id %>">
+                                                  <%= category.name %>
+                                             </option>
+                                             <% } %>
+                                   </select>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                         </form>
+                         <% } else { %>
+                              <form class="w-50 mb-5 mt-5" method="post" action="">
+                                   <div class="input-group mb-5">
+                                        <label class="input-group-text" for="select"> Category </label>
+                                        <select class="form-select" name="category" id="select">
+                                             <option value="<%= locals.category.id %>">
+                                                  <%= locals.category.name %>
+                                             </option>
+                                        </select>
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <label class="input-group-text" for="select"> Brand </label>
+                                        <select class="form-select" name="brand" id="select">
+                                             <option value="<%= locals.brand.id %>">
+                                                  <%= brand.company_name %>
+                                             </option>
+                                        </select>
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <span class="input-group-text">Name</span>
+                                        <input type="text" value="<%= locals.product?.name %>" class="form-control" name="name" placeholder="Alpha Numeric">
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <span class="input-group-text">Price</span>
+                                        <input type="number" class="form-control" name="price"
+                                             placeholder="Numeric Value" value=<%= locals.product?.price %>>
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <span class="input-group-text">Description</span>
+                                        <input class="form-control" name="description" placeholder="Description"
+                                             aria-label="With textarea" value="<%= locals.product?.description %>" >
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <span class="input-group-text">Image</span>
+                                        <input type="text" class="form-control" name="image" value=<%= locals.product?.image %> placeholder="Image URL">
+                                   </div>
+                                   <div class="input-group mb-5">
+                                        <span class="input-group-text">Warrenty</span>
+                                        <input type="number" class="form-control" name="warrenty"
+                                             placeholder="Number of years" value=<%= locals.product?.warrenty %> >
+                                   </div>
+                                   <% for(let field of category.statfields) { %>
+                                        <div class="input-group mb-5">
+                                             <span class="input-group-text">
+                                                  <%= field %>
+                                             </span>
+                                             <input type="text" class="form-control" name="<%= field %>"
+                                                  placeholder="Alphanumeric Values" value=<%= locals.product?.stats.get(field) %>>
+                                        </div>
+                                        <% } %>
+                                             <button type="submit" class="btn btn-primary">Submit</button>
+                              </form>
+                              <% } %>
+                                   <% if(locals.errors){ %>
+                                        <div class="alert alert-danger" role="alert">
+                                             <% for (let error in errors) {%>
+                                                  <p>
+                                                       <%= error.msg %>
+                                                  </p>
+                                                  <% } %>
+                                        </div>
+                                        <% } %>
+               </div>
+     </body>
+
+</html>

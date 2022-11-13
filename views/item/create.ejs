@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../head',{ title: locals.title }) -%>
+
+     <body>
+          <%- include('../header') -%>
+               <div class="container mt-5 d-flex flex-column justify-content-evenly align-items-center">
+                    <h1 class="text-center display-1"><%= locals.title %></h1>
+                    <form class="w-50 mt-5" method="post" action="">
+                    <div class="input-group mb-5">
+                         <label class="input-group-text" for="select"> Status: </label>
+                         <select class="form-select" name="status" id="select" aria-label="status select">
+                             <% for (let status of ["Available", "Sold","Pending", "Defective"]) { %>
+                                   <% if(locals.item&& item.status == status) { %>
+                                        <option value="<%= status %>" selected><%= status %></option>
+                                   <% } else { %>
+                                        <option value="<%= status %>"><%= status %></option>
+                                   <% } %>
+                               <% } %>
+                         </select>
+                    </div>
+                    <div class="input-group mb-5">
+                         <label class="input-group-text" for="select"> Product </label>
+                         <select class="form-select" name="product" id="select" aria-label="category select">
+                              <% for(let product of products){ %>
+                                   <% if(locals.item && item.product.id == product.id) { %>
+                                        <option value="<%= product.id %>" selected><%= product.name %></option>
+                                   <% } else { %>
+                                   <option value="<%= product.id %>"><%= product.name %></option>
+                                   <% } %>
+                              <% } %>
+                         </select>
+                    </div>
+                    <div class="input-group mb-5">
+                         <span class="input-group-text" id="name"> Manufacturing Date: </span>
+                         <input type="date" class="form-control" value=<%= (locals.manufactringDate) %> aria-label="Manufactring Date" name="manufactringDate" aria-describedby="Manufuctring Date">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <% if(locals.errors){ %>
+                         <div class="alert alert-danger" role="alert">
+                              <% for (let error in errors) {%>
+                                   <p>
+                                        <%= error.msg %>
+                                   </p>
+                                   <% } %>
+                         </div>
+                         <% } %>
+               </div>
+     </body>
+
+</html>

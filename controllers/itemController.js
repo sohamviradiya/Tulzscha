@@ -7,7 +7,7 @@ exports.itemController = {
                res.render("item/list", { items, title: "Items" });
           }).catch((err) => {
                res.render("error", { error: err });
-          });;
+          });
      },
      detail: (req, res) => {
           Item.findById(req.params.id).populate("product").exec().then((item) => {
@@ -18,18 +18,57 @@ exports.itemController = {
      },
      create: {
           get: (req, res) => {
-               res.send("Item Creation Get Not Yet Implemented");
+               Product.find().exec().then((products) => {
+                    res.render("item/create", { products, title: "Create Item" });
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
           post: (req, res) => {
-               res.send("Item Creation Post Not Yet Implemented");
+               const item = new Item({
+                    product: req.body.product,
+                    status: req.body.status,
+                    manufactringDate: new Date(...req.body.manufactringDate.split("-"))
+               });
+               item.save().then(() => {
+                    res.redirect(`/catalog/item/${item._id}`);
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           }
      },
      update: {
           get: (req, res) => {
-               res.send("Item Updation Get Not Yet Implemented");
+               Item.findById(req.params.id).populate("product").exec().then((item) => {
+                    if (item == null) {
+                         res.render("error", { error: new Error("Item not found") });
+                         return;
+                    }
+                    const manufactringDate = item.manufactringDate.toISOString().split("T")[0];
+                    console.log(manufactringDate);
+                    Product.find().exec().then((products) => {
+                         console.log(item);
+                              res.render("item/create", { item,manufactringDate, products, title: "Update Item" });
+                    }).catch((err) => {
+                         res.render("error", { error: err });
+                    });
+               }).catch((err) => {
+                    res.render("error", { error: err });
+               });
           },
-          post: (req, res) => {
-               res.send("Item Updation Post Not Yet Implemented");
+          post: (req, res,next) => {
+               const item = {
+                    product: req.body.product,
+                    status: req.body.status,
+                    manufactringDate: new Date(...req.body.manufactringDate.split("-")),
+                    _id: req.params.id
+               };
+               Item.findByIdAndUpdate(req.params.id, item, {}, (err, updated_item) => {
+                    if (err) {
+                         return next(err);
+                    }
+                    res.redirect(`/catalog/item/${updated_item._id}`);
+               });
           }
      },
      delete: {

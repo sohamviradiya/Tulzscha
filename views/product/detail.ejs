@@ -7,8 +7,12 @@
                <div class="container text-center d-flex flex-row">
                     <div class="w-50 p-5 d-flex flex-column align-items-center">
                          <img src=<%=product.image%> class="image" alt="...">
-                         <a href="/catalog/product/<%=product.id%>/update" class="btn btn-primary mb-4">Update Details</a>
-                         <a href="/catalog/product/<%=product.id%>/delete" class="btn btn-danger">Delete Product</a>
+                         <h3> Items: </h3>
+                         <% for (let item of locals.items) { %>
+                              <a class="mb-2" href="/catalog/item/<%=item.id%>"> <%= item.id %> </a>
+                         <% } %>
+                         <a href="/catalog/product/<%=product.id%>/update" class="mt-3 mb-2 btn btn-primary mb-4">Update Details</a>
+                         <a href="/catalog/product/<%=product.id%>/delete" class="mb-2 btn btn-danger">Delete Product</a>
                     </div>
                     <div class="w-50 d-flex flex-column align-items-center">
                          <h1 class="display-1 p-5">

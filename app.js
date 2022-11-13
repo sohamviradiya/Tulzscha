@@ -9,10 +9,7 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const catalogRouter = require('./routes/catalog');
 require('dotenv').config();
-const mongoUserName = (process.env.MONGO_USERNAME) || '';
-const mongoPassKey = (process.env.MONGO_PASSWORD) || '';
-
-mongoose.connect(`mongodb+srv://${mongoUserName}:${mongoPassKey}@azathoth.aaxtr1t.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`${process.env.MONGO_URL}`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 

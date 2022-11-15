@@ -9,10 +9,34 @@
                          <img src=<%=product.image%> class="image" alt="...">
                          <h3> Items: </h3>
                          <% for (let item of locals.items) { %>
-                              <a class="mb-2" href="/catalog/item/<%=item.id%>"> <%= item.id %> </a>
-                         <% } %>
-                         <a href="/catalog/product/<%=product.id%>/update" class="mt-3 mb-2 btn btn-primary mb-4">Update Details</a>
-                         <a href="/catalog/product/<%=product.id%>/delete" class="mb-2 btn btn-danger">Delete Product</a>
+                              <a class="mb-5" href="/catalog/item/<%=item.id%>">
+                                   <%= item.id %>
+                              </a>
+                              <% } %>
+                                   <table class="text-center table table-dark h4 mb-5">
+                                        <thead>
+                                             <tr>
+                                                  <th class="p-3"> Feature </th>
+                                                  <th class="p-3"> Specification </th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <% for(let [field,value] of product.stats.entries()) { %>
+                                                  <tr>
+                                                       <td class="p-3">
+                                                            <%= field %>
+                                                       </td>
+                                                       <td class="p-3">
+                                                            <%= value %>
+                                                       </td>
+                                                  </tr>
+                                                  <% } %>
+                                        </tbody>
+                                   </table>
+                                   <a href="/catalog/product/<%=product.id%>/update"
+                                        class="mb-3 btn btn-primary mb-4">Update Details</a>
+                                   <a href="/catalog/product/<%=product.id%>/delete" class="mb-5 btn btn-danger">Delete
+                                        Product</a>
                     </div>
                     <div class="w-50 d-flex flex-column align-items-center">
                          <h1 class="display-1 p-5">
@@ -40,25 +64,31 @@
                          </p>
                     </div>
                </div>
-               <table class="text-center table table-dark table-striped h5">
-                    <tr>
-                         <th class="p-3"> Id </th>
-                         <th class="p-3"> Status </th>
-                         <th class="p-3"> Manufacturing Date</th>
-                    </tr>
-                    <% for(let item of items) { %>
+               <h3 class="text-center mb-5"> Items: </h3>
+               <table class="text-center table table-light table-striped h5">
+                    <thead>
                          <tr>
-                              <td class="p-3">
-                                   <%= item.id %>
-                              </td>
-                              <td class="p-3">
-                                   <%= item.status %>
-                              </td>
-                              <td class="p-3">
-                                   <%= item.manufactringDate %>
-                              </td>
+                              <th class="p-3"> Id </th>
+                              <th class="p-3"> Status </th>
+                              <th class="p-3"> Manufacturing Date</th>
                          </tr>
-                         <% } %>
+                    </thead>
+                    <tbody>
+
+                         <% for(let item of items) { %>
+                              <tr>
+                                   <td class="p-3">
+                                        <%= item.id %>
+                                   </td>
+                                   <td class="p-3">
+                                        <%= item.status %>
+                                   </td>
+                                   <td class="p-3">
+                                        <%= item.manufactringDate %>
+                                   </td>
+                              </tr>
+                              <% } %>
+                    </tbody>
                </table>
      </body>
 

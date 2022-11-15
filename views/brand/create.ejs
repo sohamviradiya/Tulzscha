@@ -11,7 +11,7 @@
                               <span class="input-group-text" id="name"> Name: </span>
                               <input type="text" class="form-control" aria-label="company name"
                               name="company_name" aria-describedby="company name"
-                                   value=<%=(locals.brand?brand.company_name:'') %>>
+                                   value="<%=(locals.brand?brand.company_name:'')" %>>
                          </div>
                          <div class="input-group mb-5">
                               <label class="input-group-text" for="select"> Country: </label>
@@ -29,7 +29,7 @@
                               <span class="input-group-text" id="logo"> Logo URL: </span>
                               <input type="text" class="form-control" placeholder="https://logo.jpg"
                                    aria-label="company logo" name="logo" aria-describedby="company logo"
-                                   value=<%=(locals.brand)?(brand.logo):''%>>
+                                   value="<%=(locals.brand)?(brand.logo):''%>">
                          </div>
                          <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

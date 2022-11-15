@@ -11,7 +11,7 @@
 
                     <% if(locals.categories) {%>
                          <form class="w-50 mt-5 mb-5" method="post" action="">
-                              <input hidden="true" name="category_selection" value=<%=true%>>
+                              <input hidden="true" name="category_selection" value= "<%= true%>">
                               <div class="input-group mb-5">
                                    <label class="input-group-text" for="select"> Brand </label>
                                    <select class="form-select" name="brand" id="select" aria-label="category select">
@@ -59,7 +59,7 @@
                                    <div class="input-group mb-5">
                                         <span class="input-group-text">Price</span>
                                         <input type="number" class="form-control" name="price"
-                                             placeholder="Numeric Value" value=<%= locals.product?.price %>>
+                                             placeholder="Numeric Value" value= "<%= locals.product?.price %>">
                                    </div>
                                    <div class="input-group mb-5">
                                         <span class="input-group-text">Description</span>
@@ -68,12 +68,12 @@
                                    </div>
                                    <div class="input-group mb-5">
                                         <span class="input-group-text">Image</span>
-                                        <input type="text" class="form-control" name="image" value=<%= locals.product?.image %> placeholder="Image URL">
+                                        <input type="text" class="form-control" name="image" value="<%= locals.product?.image %>" placeholder="Image URL">
                                    </div>
                                    <div class="input-group mb-5">
                                         <span class="input-group-text">Warrenty</span>
                                         <input type="number" class="form-control" name="warrenty"
-                                             placeholder="Number of years" value=<%= locals.product?.warrenty %> >
+                                             placeholder="Number of years" value="<%= locals.product?.warrenty %>">
                                    </div>
                                    <% for(let field of category.statfields) { %>
                                         <div class="input-group mb-5">
@@ -81,7 +81,7 @@
                                                   <%= field %>
                                              </span>
                                              <input type="text" class="form-control" name="<%= field %>"
-                                                  placeholder="Alphanumeric Values" value=<%= locals.product?.stats.get(field) %>>
+                                                  placeholder="Alphanumeric Values" value="<%= locals.product?.stats.get(field) %>">
                                         </div>
                                         <% } %>
                                              <button type="submit" class="btn btn-primary">Submit</button>
